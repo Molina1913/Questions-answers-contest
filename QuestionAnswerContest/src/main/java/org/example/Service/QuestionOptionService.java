@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import static org.example.Service.MenuService.askOption;
-import static org.example.integrationdatabase.menu.Menu.setUpOptions;
+import static org.example.menu.Menu.setUpOptions;
 
 public class QuestionOptionService {
     static AnswerOptionCrud answerOptionCrud = new AnswerOptionCrud();
@@ -56,7 +56,6 @@ public class QuestionOptionService {
             System.out.println("Insert the question description");
             question.setQuestion_description(scanner.nextLine());
             question.setCategory(selectCategory());
-            questionsCrud.createQuestion(question);
             System.out.println("Remember the first option will be the true answer");
             for (int j = 1; j <= 4; j++) {
                 AnswerOption answerOption = new AnswerOption();
@@ -65,12 +64,14 @@ public class QuestionOptionService {
                 System.out.println("Enter the description of the option");
                 answerOption.setOptionDescription(scanner.nextLine());
                 if (j == 1) {
-                    answerOption.setTrue(true);
+                    answerOption.setIsTrue((byte) 1);
                 } else {
-                    answerOption.setTrue(false);
+                    answerOption.setIsTrue((byte) 0);
                 }
                 answerOptionCrud.createAnswerOption(answerOption);
+                scanner.nextLine();
             }
+            questionsCrud.createQuestion(question);
         }
     }
 

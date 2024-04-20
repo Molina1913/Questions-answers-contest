@@ -1,4 +1,4 @@
-package org.example.integrationdatabase.menu;
+package org.example.menu;
 
 public class ConstantesMenu {
     public static String MENU_START_GAME = "Welcome to QuestionAnswerContest:\n" +

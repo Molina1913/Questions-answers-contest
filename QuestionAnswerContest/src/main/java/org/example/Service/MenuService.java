@@ -3,13 +3,12 @@ package org.example.Service;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import static org.example.Service.QuestionOptionService.createQuestions;
 import static org.example.Service.QuestionOptionService.setUpGame;
 import static org.example.Service.ServiceConstants.VALID_OPTION;
-import static org.example.integrationdatabase.menu.Menu.startGame;
+import static org.example.menu.Menu.startGame;
 
 public class MenuService {
-    public static void startApp() {
+    public static void startApp() throws SQLException {
         int option;
         boolean flag = true;
         while (flag) {

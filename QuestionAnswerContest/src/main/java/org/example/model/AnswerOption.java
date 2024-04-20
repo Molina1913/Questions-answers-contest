@@ -8,15 +8,23 @@ public class AnswerOption {
     private int idOption;
     private int idQuestion;
     private String OptionDescription;
-    private boolean isTrue;
+    private byte isTrue;
 
     public AnswerOption() {
     }
 
-    public AnswerOption(int idOption, int idQuestion, String optionDescription, boolean isTrue) {
+    public AnswerOption(int idOption, int idQuestion, String optionDescription, byte isTrue) {
         this.idOption = idOption;
         this.idQuestion = idQuestion;
         OptionDescription = optionDescription;
+        this.isTrue = isTrue;
+    }
+
+    public byte getIsTrue() {
+        return isTrue;
+    }
+
+    public void setIsTrue(byte isTrue) {
         this.isTrue = isTrue;
     }
 
@@ -44,11 +52,5 @@ public class AnswerOption {
         OptionDescription = optionDescription;
     }
 
-    public boolean isTrue() {
-        return isTrue;
-    }
 
-    public void setTrue(boolean aTrue) {
-        isTrue = aTrue;
-    }
 }

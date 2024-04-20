@@ -18,7 +18,7 @@ public class AnswerOptionCrud {
 
     public void createAnswerOption(AnswerOption answerOption){
         mySqlOperation.executeSqlStatementVoid(String.format(CREATE_ANSWER_OPTION, answerOption.getIdOption(), answerOption.getIdQuestion(),
-                answerOption.getOptionDescription(), answerOption.isTrue()));
+                answerOption.getOptionDescription(), answerOption.getIsTrue()));
     }
     public void selectDataAnswers() throws SQLException {
         mySqlOperation.setSqlStatement(String.format(SELECT, ANSWER));
@@ -31,7 +31,7 @@ public class AnswerOptionCrud {
             int idOption = resultSet.getInt("id_option");
             int idQuestion = resultSet.getInt("id_question");
             String optionsDescription = resultSet.getString("option_description");
-            boolean isTrue = resultSet.getBoolean("is_true");
+            byte isTrue = resultSet.getByte("is_true");
 
             AnswerOption answerOption=new AnswerOption(idOption, idQuestion, optionsDescription, isTrue);
             answers.add(answerOption);
