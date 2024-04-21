@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import static org.example.Service.MenuService.askOption;
+import static org.example.Service.ServiceConstants.*;
+import static org.example.menu.Menu.difficultyMenu;
 import static org.example.menu.Menu.setUpOptions;
 
 public class QuestionOptionService {
@@ -36,13 +38,16 @@ public class QuestionOptionService {
             case 2:
                 createQuestions();
                 break;
+            case 0:
+                flag=false;
+                break;
             default:
-                System.out.println("Enter a valid option");
+                System.out.println(VALID_OPTION);
         }
         return flag;
     }
 
-    private static void loadQuestions() throws SQLException {
+    public static void loadQuestions() throws SQLException {
         answerOptionCrud.selectDataAnswers();
         questionsCrud.selectDataQuestions();
     }
@@ -50,18 +55,18 @@ public class QuestionOptionService {
     public static void createQuestions() {
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");
         for (int i = 1; i <= 25; i++) {
-            System.out.println("Insert a question");
+            System.out.println(INSERT_QUESTION);
             Question question = new Question();
-            question.setId_question(i);
-            System.out.println("Insert the question description");
-            question.setQuestion_description(scanner.nextLine());
+            question.setIdQuestion(i);
+            System.out.println(INSERT_QUESTION_DESCRIPTION);
+            question.setQuestionDescription(scanner.nextLine());
             question.setCategory(selectCategory());
-            System.out.println("Remember the first option will be the true answer");
+            System.out.println(TRUE_ANSWER);
             for (int j = 1; j <= 4; j++) {
                 AnswerOption answerOption = new AnswerOption();
                 answerOption.setIdQuestion(i);
                 answerOption.setIdOption(j);
-                System.out.println("Enter the description of the option");
+                System.out.println(DESCRIPTION_OPTION);
                 answerOption.setOptionDescription(scanner.nextLine());
                 if (j == 1) {
                     answerOption.setIsTrue((byte) 1);
@@ -69,7 +74,6 @@ public class QuestionOptionService {
                     answerOption.setIsTrue((byte) 0);
                 }
                 answerOptionCrud.createAnswerOption(answerOption);
-                scanner.nextLine();
             }
             questionsCrud.createQuestion(question);
         }
@@ -78,26 +82,21 @@ public class QuestionOptionService {
     private static String selectCategory() {
         boolean flag = true;
         while (flag) {
-            System.out.println("Select the category of the question");
-            System.out.println("1. Very easy");
-            System.out.println("2. Easy");
-            System.out.println("3. Medium");
-            System.out.println("4. Difficult");
-            System.out.println("5. Very difficult");
+            difficultyMenu();
             int option = askOption();
             switch (option) {
                 case 1:
-                    return "Very easy";
+                    return VERY_EASY;
                 case 2:
-                    return "Easy";
+                    return EASY;
                 case 3:
-                    return "Medium";
+                    return MEDIUM;
                 case 4:
-                    return "Difficult";
+                    return DIFFICULT;
                 case 5:
-                    return "Very difficult";
+                    return VERY_DIFFICULT;
                 default:
-                    System.out.println("Enter a valid option");
+                    System.out.println(VALID_OPTION);
                     break;
             }
         }
