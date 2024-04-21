@@ -1,5 +1,6 @@
 package org.example.menu;
 
+import static org.example.menu.ConstantesMenu.CONTINUE_MENU;
 import static org.example.menu.ConstantesMenu.DIFFICULTY_MENU;
 
 public class Menu {
@@ -12,5 +13,8 @@ public class Menu {
     }
     public static void difficultyMenu(){
         System.out.println(DIFFICULTY_MENU);
+    }
+    public static void continueMenu(){
+        System.out.println(CONTINUE_MENU);
     }
 }

@@ -12,6 +12,7 @@ import static org.example.Service.MenuService.askOption;
 import static org.example.Service.PlayerService.validatePlayer;
 import static org.example.Service.QuestionOptionService.loadQuestions;
 import static org.example.Service.ServiceConstants.*;
+import static org.example.menu.Menu.continueMenu;
 import static org.example.model.AnswerOption.answers;
 import static org.example.model.Question.*;
 
@@ -19,31 +20,65 @@ public class GameHistoryService {
     public static void startGame() throws SQLException {
         Player player;
         List<AnswerOption> optionsToChoose;
+        int accumulatedPrize = 0;
         int roundNumber = 1;
-        boolean flag = true;
+        boolean continuePlaying = true;
+        final int MAX_ROUNDS = 5;
 
         loadQuestionsByDifficulty();
         player = validatePlayer();
-        System.out.println("Welcome to Question Answer Contest");
-        while (flag) {
-            System.out.println("Round " + roundNumber);
+        System.out.println(WELCOME);
+        while (continuePlaying) {
+            System.out.println(ROUND + roundNumber);
             optionsToChoose = showQuestion(roundNumber);
-            System.out.println("Select the answer");
+            System.out.println(SELECT_ANSWER);
             int answer = askOption();
-            flag = checkAnswer(answer, optionsToChoose);
-
+            continuePlaying = checkAnswer(answer, optionsToChoose);
+            accumulatedPrize += 100;
+            /*
+            continuePlaying = askToContinue(accumulatedPrize, continuePlaying);
+             */
+            if (continuePlaying) {
+                continuePlaying = askToContinue(accumulatedPrize);
+            }
             roundNumber++;
+            if (roundNumber > MAX_ROUNDS) {
+                System.out.println(CONGRATULATIONS_WON);
+                continuePlaying=false;
+            }
         }
+        System.out.println(THANKS_PARTICIPATING);
+    }
+    //Check if i can use it
+    private static boolean checkRound(int round) {
+        if (round == 5) {
+            System.out.println("Congratulations, You Have Won!");
+        }
+        return false;
+    }
 
+    private static boolean askToContinue(int accumulatedPrize) {
+        int option;
+        while (true) {
+            System.out.println(ACCUMULATED_PRIZE + "$" + accumulatedPrize);
+            continueMenu();
+            option = askOption();
+            if (option == 1) {
+                return true;
+            } else if (option == 2) {
+                return false;
+            } else {
+                System.out.println(VALID_OPTION);
+            }
+        }
     }
 
     private static boolean checkAnswer(int answer, List<AnswerOption> options) {
         if (options.get(answer - 1).getIsTrue() == 1) {
-            System.out.println("Congratulations, the answer is correct");
+            System.out.println(CORRECT_ANSWER);
             return true;
         } else {
-            System.out.println("The answer is wrong");
-            System.out.println("you have lost");
+            System.out.println(WRONG_ANSWER);
             return false;
         }
     }
@@ -79,7 +114,7 @@ public class GameHistoryService {
                 System.out.println(i + 1 + ". " + options.get(i).getOptionDescription());
             }
             return options;
-        }else if (round == 3) {
+        } else if (round == 3) {
             Question question = mediumQuestions.get(randomQuestion);
             String questionDesc = question.getQuestionDescription();
             for (int i = 0; i < answers.size(); i++) {
@@ -92,7 +127,7 @@ public class GameHistoryService {
                 System.out.println(i + 1 + ". " + options.get(i).getOptionDescription());
             }
             return options;
-        }else if (round == 4) {
+        } else if (round == 4) {
             Question question = difficultQuestions.get(randomQuestion);
             String questionDesc = question.getQuestionDescription();
             for (int i = 0; i < answers.size(); i++) {
@@ -105,7 +140,7 @@ public class GameHistoryService {
                 System.out.println(i + 1 + ". " + options.get(i).getOptionDescription());
             }
             return options;
-        }else if (round == 5) {
+        } else if (round == 5) {
             Question question = veryDifficultQuestions.get(randomQuestion);
             String questionDesc = question.getQuestionDescription();
             for (int i = 0; i < answers.size(); i++) {
