@@ -9,4 +9,11 @@ public class ConstantesMenu {
             "1. Load questions\n" +
             "2. Create questions\n" +
             "0. Salir";
+
+    public static String DIFFICULTY_MENU ="Select the category of the question\n"+
+            "1. Very easy\n"+
+            "2. Easy\n"+
+            "3. Medium\n"+
+            "4. Difficult\n"+
+            "5. Very difficult\n";
 }

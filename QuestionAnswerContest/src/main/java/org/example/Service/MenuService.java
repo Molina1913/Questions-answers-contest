@@ -3,16 +3,17 @@ package org.example.Service;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import static org.example.Service.GameHistoryService.startGame;
 import static org.example.Service.QuestionOptionService.setUpGame;
 import static org.example.Service.ServiceConstants.VALID_OPTION;
-import static org.example.menu.Menu.startGame;
+import static org.example.menu.Menu.startGameMenu;
 
 public class MenuService {
     public static void startApp() throws SQLException {
         int option;
         boolean flag = true;
         while (flag) {
-            startGame();
+            startGameMenu();
             option = askOption();
             flag = selectOption(option, flag);
         }
@@ -21,6 +22,7 @@ public class MenuService {
     private static boolean selectOption(int option, boolean flag) throws SQLException {
         switch (option) {
             case 1:
+                startGame();
                 break;
             case 2:
                 setUpGame();
