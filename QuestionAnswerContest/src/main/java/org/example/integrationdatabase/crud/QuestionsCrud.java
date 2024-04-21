@@ -1,14 +1,12 @@
 package org.example.integrationdatabase.crud;
 
 import org.example.integrationdatabase.mysql.MySqlOperation;
-import org.example.model.AnswerOption;
 import org.example.model.Question;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static org.example.integrationdatabase.mysql.MySqlConstants.*;
-import static org.example.model.AnswerOption.answers;
 import static org.example.model.Question.questions;
 
 public class QuestionsCrud {
@@ -18,8 +16,8 @@ public class QuestionsCrud {
         mySqlOperation=new MySqlOperation();
     }
     public void createQuestion(Question question){
-        mySqlOperation.executeSqlStatementVoid(String.format(CREATE_QUESTION, question.getId_question(),
-                question.getQuestion_description(), question.getCategory()));
+        mySqlOperation.executeSqlStatementVoid(String.format(CREATE_QUESTION, question.getIdQuestion(),
+                question.getQuestionDescription(), question.getCategory()));
     }
     public void selectDataQuestions() throws SQLException {
         mySqlOperation.setSqlStatement(String.format(SELECT, QUESTION));

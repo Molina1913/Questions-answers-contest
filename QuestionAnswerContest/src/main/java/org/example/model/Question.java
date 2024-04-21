@@ -1,38 +1,42 @@
 package org.example.model;
 
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Question {
-    public static List<Question> questions=new ArrayList<>();
-    private int id_question;
-    private String question_description;
+    public static List<Question> questions = new ArrayList<>();
+    public static List<Question> veryEasyQuestions = new ArrayList<>();
+    public static List<Question> easyQuestions = new ArrayList<>();
+    public static List<Question> mediumQuestions = new ArrayList<>();
+    public static List<Question> difficultQuestions = new ArrayList<>();
+    public static List<Question> veryDifficultQuestions = new ArrayList<>();
+    private int idQuestion;
+    private String questionDescription;
     private String category;
 
     public Question() {
     }
 
-    public Question(int id_question, String question_description, String category) {
-        this.id_question = id_question;
-        this.question_description = question_description;
+    public Question(int idQuestion, String questionDescription, String category) {
+        this.idQuestion = idQuestion;
+        this.questionDescription = questionDescription;
         this.category = category;
     }
 
-    public int getId_question() {
-        return id_question;
+    public int getIdQuestion() {
+        return idQuestion;
     }
 
-    public void setId_question(int id_question) {
-        this.id_question = id_question;
+    public void setIdQuestion(int idQuestion) {
+        this.idQuestion = idQuestion;
     }
 
-    public String getQuestion_description() {
-        return question_description;
+    public String getQuestionDescription() {
+        return questionDescription;
     }
 
-    public void setQuestion_description(String question_description) {
-        this.question_description = question_description;
+    public void setQuestionDescription(String questionDescription) {
+        this.questionDescription = questionDescription;
     }
 
     public String getCategory() {
