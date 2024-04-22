@@ -45,24 +45,24 @@ public class GameHistoryService {
             createGameHistory(player, answer, optionsToChoose.get(0).getIdQuestion(), roundNumber);
             continuePlaying = checkAnswer(answer, optionsToChoose);
             accumulatedPrize += 100;
-            if (continuePlaying && roundNumber!=MAX_ROUNDS) {
+            if (continuePlaying && roundNumber != MAX_ROUNDS) {
                 continuePlaying = askToContinue(accumulatedPrize);
+                showAccumulatedPrizeIfNo(accumulatedPrize, continuePlaying);
             }
             roundNumber++;
             if (roundNumber > MAX_ROUNDS) {
                 System.out.println(CONGRATULATIONS_WON);
+                System.out.println(FINAL_PRIZE + accumulatedPrize);
                 continuePlaying = false;
             }
         }
         System.out.println(THANKS_PARTICIPATING);
     }
 
-    //Check if i can use it
-    private static boolean checkRound(int round) {
-        if (round == 5) {
-            System.out.println(CONGRATULATIONS_WON);
+    private static void showAccumulatedPrizeIfNo(int accumulatedPrize, boolean continuePlaying) {
+        if (!continuePlaying) {
+            System.out.println(FINAL_PRIZE + accumulatedPrize);
         }
-        return false;
     }
 
     private static boolean askToContinue(int accumulatedPrize) {
@@ -184,7 +184,7 @@ public class GameHistoryService {
     }
 
     public static void createGameHistory(Player player, int idOption, int idQuestion, int roundNumber) {
-        GameHistory gameHistory = new GameHistory(player.getId(),  idQuestion, idOption,roundNumber);
+        GameHistory gameHistory = new GameHistory(player.getId(), idQuestion, idOption, roundNumber);
         gameHistoryCrud.createHistory(gameHistory);
 
     }

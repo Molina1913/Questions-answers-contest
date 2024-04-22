@@ -22,4 +22,5 @@ public class ServiceConstants {
     public static final String ACCUMULATED_PRIZE = "This is you accumulated prize so far ";
     public static final String THANKS_PARTICIPATING = "Thanks for participating";
     public static final String CONGRATULATIONS_WON ="Congratulations, You Have Won!";
+    public static final String FINAL_PRIZE ="Your final prize is: ";
 }
