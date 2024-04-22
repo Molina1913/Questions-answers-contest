@@ -12,6 +12,8 @@ import static org.example.Service.MenuService.askOption;
 import static org.example.Service.ServiceConstants.*;
 import static org.example.menu.Menu.difficultyMenu;
 import static org.example.menu.Menu.setUpOptions;
+import static org.example.model.AnswerOption.answers;
+import static org.example.model.Question.questions;
 
 public class QuestionOptionService {
     static AnswerOptionCrud answerOptionCrud = new AnswerOptionCrud();
@@ -48,8 +50,12 @@ public class QuestionOptionService {
     }
 
     public static void loadQuestions() throws SQLException {
-        answerOptionCrud.selectDataAnswers();
-        questionsCrud.selectDataQuestions();
+        if(answers.isEmpty()){
+            answerOptionCrud.selectDataAnswers();
+        }
+        if(questions.isEmpty()){
+            questionsCrud.selectDataQuestions();
+        }
     }
 
     public static void createQuestions() {

@@ -45,7 +45,7 @@ public class GameHistoryService {
             createGameHistory(player, answer, optionsToChoose.get(0).getIdQuestion(), roundNumber);
             continuePlaying = checkAnswer(answer, optionsToChoose);
             accumulatedPrize += 100;
-            if (continuePlaying) {
+            if (continuePlaying && roundNumber!=MAX_ROUNDS) {
                 continuePlaying = askToContinue(accumulatedPrize);
             }
             roundNumber++;
