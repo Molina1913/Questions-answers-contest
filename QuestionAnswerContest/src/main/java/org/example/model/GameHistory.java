@@ -10,6 +10,25 @@ public class GameHistory {
     private int idRound;
     private List<Question> questions;
 
+    public GameHistory() {
+    }
+
+    public GameHistory(String idPlayer, int idQuestion, int idOption, int idRound) {
+        this.idPlayer = idPlayer;
+        this.idQuestion = idQuestion;
+        this.idOption = idOption;
+        this.idRound = idRound;
+    }
+
+    public GameHistory(int idHistory, String idPlayer, int idQuestion, int idOption, int idRound, List<Question> questions) {
+        this.idHistory = idHistory;
+        this.idPlayer = idPlayer;
+        this.idQuestion = idQuestion;
+        this.idOption = idOption;
+        this.idRound = idRound;
+        this.questions = questions;
+    }
+
     public int getIdHistory() {
         return idHistory;
     }

@@ -1,6 +1,8 @@
 package org.example.Service;
 
+import org.example.integrationdatabase.crud.GameHistoryCrud;
 import org.example.model.AnswerOption;
+import org.example.model.GameHistory;
 import org.example.model.Player;
 import org.example.model.Question;
 
@@ -17,6 +19,12 @@ import static org.example.model.AnswerOption.answers;
 import static org.example.model.Question.*;
 
 public class GameHistoryService {
+    static GameHistoryCrud gameHistoryCrud = new GameHistoryCrud();
+
+
+    public GameHistoryService() {
+    }
+
     public static void startGame() throws SQLException {
         Player player;
         List<AnswerOption> optionsToChoose;
@@ -31,28 +39,28 @@ public class GameHistoryService {
         while (continuePlaying) {
             System.out.println(ROUND + roundNumber);
             optionsToChoose = showQuestion(roundNumber);
+
             System.out.println(SELECT_ANSWER);
             int answer = askOption();
+            createGameHistory(player, answer, optionsToChoose.get(0).getIdQuestion(), roundNumber);
             continuePlaying = checkAnswer(answer, optionsToChoose);
             accumulatedPrize += 100;
-            /*
-            continuePlaying = askToContinue(accumulatedPrize, continuePlaying);
-             */
             if (continuePlaying) {
                 continuePlaying = askToContinue(accumulatedPrize);
             }
             roundNumber++;
             if (roundNumber > MAX_ROUNDS) {
                 System.out.println(CONGRATULATIONS_WON);
-                continuePlaying=false;
+                continuePlaying = false;
             }
         }
         System.out.println(THANKS_PARTICIPATING);
     }
+
     //Check if i can use it
     private static boolean checkRound(int round) {
         if (round == 5) {
-            System.out.println("Congratulations, You Have Won!");
+            System.out.println(CONGRATULATIONS_WON);
         }
         return false;
     }
@@ -175,4 +183,9 @@ public class GameHistoryService {
         }
     }
 
+    public static void createGameHistory(Player player, int idOption, int idQuestion, int roundNumber) {
+        GameHistory gameHistory = new GameHistory(player.getId(),  idQuestion, idOption,roundNumber);
+        gameHistoryCrud.createHistory(gameHistory);
+
+    }
 }

@@ -11,5 +11,6 @@ public class MySqlConstants {
     public static final String ANSWER = "answer_options";
     public static final String CREATE_QUESTION = "INSERT INTO contest.questions VALUES ('%s', '%s', '%s')";
     public static final String CREATE_ANSWER_OPTION = "INSERT INTO contest.answer_options VALUES ('%s', '%s', '%s', '%s')";
-
+    public static final String CREATE_GAME_HISTORY = "INSERT INTO contest.game_history (id_player, id_question, id_option, id_round) " +
+            "VALUES ('%s', '%s', '%s', '%s')";
 }
